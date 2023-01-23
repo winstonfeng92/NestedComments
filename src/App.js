@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import AllComments from './components/AllComments'
 
-function App() {
+const App = (props) => {
+  
+  const [comments, setComments] = useState(props.comments)
+  const [newComment, setNewComment] = useState(
+    'a new comment...'
+  ) 
+  let counterComment = 25;
+  const addComment = (event) => {
+    event.preventDefault()
+    const commentObject = {
+      content: newComment,
+      id: counterComment,
+      user: 'Userdefault'
+    }
+    counterComment+=1;
+    setComments(comments.concat(commentObject))
+    setNewComment('')
+  }
+
+  const handleCommentChange = (event) => {
+    console.log(event.target.value)
+    setNewComment(event.target.value)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    <h1>Comments</h1>
+
+    <div>
+        {comments.map(comment =>
+        <AllComments key={comment.id} comment={comment} comments={comments} setComments={setComments}/>
+        )}
     </div>
+    <li></li>
+    <form onSubmit={addComment}>
+        <input 
+        value = {newComment}
+        onChange = {handleCommentChange}/>
+        <button type="submit">save</button>
+      </form>
+  </div>
   );
 }
 
