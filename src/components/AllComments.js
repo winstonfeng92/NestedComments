@@ -39,12 +39,7 @@ function updateLocalComment(id, message, setComments) {
     })
 }
 
-const update = (index, comment, comments, setComments) => {
-    const copy = [...comments];
-    console.log('winston')
-    copy[index].content = comment;
-    setComments(copy);
-}
+
 
 const deleteComment = (index, comment, comments, setComments) => {
     const copy = [...comments];
@@ -91,8 +86,11 @@ const AllComments = ({ index, comment , comments, setComments}) => {
           <CommentForm
             // autoFocus
             initialValue={comment.content}
-            onSubmit={() => update(index, 'wisnton', comments, setComments)}
+            //onSubmit={() => update(index, 'wisnton', comments, setComments)}
             onClick={() => setIsEditing(prev => !prev)}
+            comments = {comments}
+            index = {index}
+            setComments = {setComments}
             // loading={updateCommentFn.loading}
             // error={updateCommentFn.error}
           />
