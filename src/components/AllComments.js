@@ -12,12 +12,11 @@ function myDeleteFunction(comment, comments, setComments) {
             temp.push(comments[i])
         }
     }
-
-function checkRecursiveChildren() {
- //check if comment
-//write a function where base case is no children
-//recursive is if child id == id...
-}
+// function checkRecursiveChildren() {
+//  //check if comment
+// //write a function where base case is no children
+// //recursive is if child id == id...
+// }
     console.log("temp", temp)
     setComments(temp)
     // return (
@@ -28,6 +27,31 @@ function checkRecursiveChildren() {
     console.log("after")
 }
 
+function updateLocalComment(id, message, setComments) {
+    setComments(prevComments => {
+      return prevComments.map(comment => {
+        if (comment.id === id) {
+          return { ...comment, message }
+        } else {
+          return comment
+        }
+      })
+    })
+}
+
+const update = (index, comment, comments, setComments) => {
+    const copy = [...comments];
+    console.log('winston')
+    copy[index].content = comment;
+    setComments(copy);
+}
+
+const deleteComment = (index, comment, comments, setComments) => {
+    const copy = [...comments];
+    console.log('winston')
+    copy.splice(index, 1);
+    setComments(copy);
+}
 
 // function handleSubmitComment(comment, comments, setComments) {
 //     // toggle item's complete flag
@@ -46,7 +70,7 @@ function recursiveRemove ( list, id, setComments ) {
     });
 }
 
-const AllComments = ({ comment , comments, setComments}) => {
+const AllComments = ({ index, comment , comments, setComments}) => {
     
     const [isEditing, setIsEditing] = useState(false)
 
@@ -60,13 +84,14 @@ const AllComments = ({ comment , comments, setComments}) => {
         <div className = "footer"> 
             <button>Reply</button> 
             <button onClick={() => setIsEditing(prev => !prev)}> Edit </button>
-            <button onClick={() => myDeleteFunction(comment, comments, setComments)}> Delete </button>
+            <button onClick={() => deleteComment(index, comment, comments, setComments)}> Delete </button>
+            <button onClick={() => myDeleteFunction(comment, comments, setComments)}> Delete2 </button>
             </div>
         {isEditing ? 
           <CommentForm
             // autoFocus
             initialValue={comment.content}
-            //onSubmit={() => setIsEditing(prev => !prev)}
+            onSubmit={() => update(index, 'wisnton', comments, setComments)}
             onClick={() => setIsEditing(prev => !prev)}
             // loading={updateCommentFn.loading}
             // error={updateCommentFn.error}

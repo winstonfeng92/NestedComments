@@ -12,7 +12,7 @@ const App = (props) => {
     event.preventDefault()
     const commentObject = {
       content: newComment,
-      id: counterComment,
+      id: Math.random(),
       user: 'Userdefault'
     }
     counterComment+=1;
@@ -30,8 +30,8 @@ const App = (props) => {
     <h1>Comments</h1>
 
     <div>
-        {comments.map(comment =>
-        <AllComments key={comment.id} comment={comment} comments={comments} setComments={setComments}/>
+        {comments.map((comment,i) =>
+        <AllComments key={comment.id} index={i} comment={comment} comments={comments} setComments={setComments}/>
         )}
     </div>
     <li></li>
