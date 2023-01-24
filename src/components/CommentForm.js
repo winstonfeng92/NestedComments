@@ -15,11 +15,6 @@ export function CommentForm({
 
   function handleSubmit(e) {
     e.preventDefault()
-    //onSubmit(message).then(() => setMessage(""))
-    //console.log('comment attempt')
-    //update(index, message, comments, setComments)
-
-    //update2(id, message, comments, setComments)
     const copy = [...comments];
     const copy2 = updateList(copy, id, message)
     setComments(copy2);
@@ -56,6 +51,8 @@ const handleAddComment = (event) => {
       user: 'Userdefault',
       children: [],
     }
+    console.log("mssage")
+    console.log(message)
     const copy = [...comments];
     const copy2 = updateComments(copy, id, commentObject)
     console.log("end of handler")
@@ -79,7 +76,7 @@ function updateComments(array, id, newReply) {
                 if(comment.id == id) comment.children.push(newReply);
                 return comment;}
             console.log('map2')
-            comment.children = updateList(comment.children, id, newReply);
+            comment.children = updateComments(comment.children, id, newReply);
             return comment;
         });
 }
