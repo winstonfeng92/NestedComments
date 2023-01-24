@@ -82,31 +82,10 @@ function updateComments(array, id, newReply) {
 }
 
 
-
-const update2 = (id, newMessage, comments, setComments) => {
-        //console.log('attempting update')
-        //console.log(message)
-        //console.log(comment)
-        const copy = [...comments];
-        const copy2 = updateList(copy, id, newMessage)
-        setComments(copy2);
-    }
-const update = (index, comment, comments, setComments) => {
-    console.log('attempting update')
-    //console.log(message)
-    //console.log(comment)
-    const copy = [...comments];
-    console.log(copy)
-    copy[index].content = comment;
-    console.log('copy index content')
-    setComments(copy);
-}
-
   return (
     <form onSubmit= {onSubmit==='handleEdit'?handleSubmit:handleAddComment}>
       <div className="comment-form-row">
         <textarea
-          //autoFocus={autoFocus}
           value={message}
           onChange={e => 
             {setMessage(e.target.value)
