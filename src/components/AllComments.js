@@ -86,6 +86,8 @@ function recursiveRemove ( list, id, setComments ) {
 const AllComments = ({ index, comment , comments, setComments}) => {
     
     const [isEditing, setIsEditing] = useState(false)
+    const [isReplying, setIsReplying] = useState(false)
+
 
 
     return(
@@ -95,10 +97,25 @@ const AllComments = ({ index, comment , comments, setComments}) => {
         </div>
         <div className = "content">{comment.content}</div>
         <div className = "footer"> 
-            <button>Reply</button> 
+            <button onClick={() => setIsReplying(prev => !prev)}>Reply</button> 
             <button onClick={() => setIsEditing(prev => !prev)}> Edit </button>
             <button onClick={() => deleteComment2(index, comment, comments, setComments)}> Delete </button>
             </div>
+        {isReplying ? 
+          <CommentForm
+            // autoFocus
+            initialValue={comment.content}
+            //onSubmit={() => update(index, 'wisnton', comments, setComments)}
+            onClick={() => setIsReplying(prev => !prev)}
+            comments = {comments}
+            index = {index}
+            setComments = {setComments}
+            id = {comment.id}
+            onSubmit = {'handleReply'}
+            // loading={updateCommentFn.loading}
+            // error={updateCommentFn.error}
+          />
+        : <div></div>}
         {isEditing ? 
           <CommentForm
             // autoFocus
@@ -109,6 +126,7 @@ const AllComments = ({ index, comment , comments, setComments}) => {
             index = {index}
             setComments = {setComments}
             id = {comment.id}
+            onSubmit = {'handleEdit'}
             // loading={updateCommentFn.loading}
             // error={updateCommentFn.error}
           />

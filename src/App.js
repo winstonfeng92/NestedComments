@@ -7,7 +7,6 @@ const App = (props) => {
   const [newComment, setNewComment] = useState(
     'a new comment...'
   ) 
-  let counterComment = 25;
   const addComment = (event) => {
     event.preventDefault()
     const commentObject = {
@@ -15,7 +14,6 @@ const App = (props) => {
       id: Math.random(),
       user: 'Userdefault'
     }
-    counterComment+=1;
     setComments(comments.concat(commentObject))
     setNewComment('')
   }
