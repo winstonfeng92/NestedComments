@@ -16,6 +16,7 @@ const comments = [
         id: 35,
         content: 'GrandCHILDREN!!!!!',
         user: 'User1',
+        children: [],
       }]
     }]
   },

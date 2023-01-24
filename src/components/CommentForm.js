@@ -9,6 +9,7 @@ export function CommentForm({
   index,
   comments,
   setComments,
+  id,
 }) {
   const [message, setMessage] = useState(initialValue)
 
@@ -16,11 +17,52 @@ export function CommentForm({
     e.preventDefault()
     //onSubmit(message).then(() => setMessage(""))
     //console.log('comment attempt')
-    update(index, message, comments, setComments)
+    //update(index, message, comments, setComments)
+
+    update2(id, message, comments, setComments)
     setMessage("")
   }
 
-  const update = (index, comment, comments, setComments) => {
+const update2 = (id, newMessage, comments, setComments) => {
+    //console.log('attempting update')
+    //console.log(message)
+    //console.log(comment)
+    const copy = [...comments];
+    const copy2 = updateList(copy, id, newMessage)
+    setComments(copy2);
+}
+
+function updateList(array, id, newMessage) {
+    console.log('trying to update this')
+    console.log(array);
+    return array
+        // .map(comment => {
+        //     console.log('begin to render children')
+        //     console.log(comment.children)
+        //     if(comment.id == id)
+        //     {console.log('first map in updateList')
+        //     comment.content = newMessage
+        //     console.log(newMessage)
+        //     console.log(comment.children)
+        //     console.log(array) }})
+        .map((comment) => {
+            if(comment.id == id)
+            {console.log('first map in updateList')
+            comment.content = newMessage
+            console.log(newMessage)
+            console.log(comment.children)
+            console.log(array)}
+            if (!comment.children || !Array.isArray(comment.children)) 
+            {   console.log('first return clause')
+                if(comment.id == id) comment.content = newMessage;
+                return comment;}
+            console.log('map2')
+            comment.children = updateList(comment.children, id, newMessage);
+            return comment;
+        });
+}
+
+const update = (index, comment, comments, setComments) => {
     console.log('attempting update')
     //console.log(message)
     //console.log(comment)

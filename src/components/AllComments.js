@@ -59,6 +59,8 @@ function removeFromList(array, id) {
         .filter(comment => comment.id !== id)
         .map((comment) => {
             if (!comment.children || !Array.isArray(comment.children)) return comment;
+            console.log('2nd map')
+            console.log(comment.children)
             comment.children = removeFromList(comment.children, id);
             return comment;
         });
@@ -106,6 +108,7 @@ const AllComments = ({ index, comment , comments, setComments}) => {
             comments = {comments}
             index = {index}
             setComments = {setComments}
+            id = {comment.id}
             // loading={updateCommentFn.loading}
             // error={updateCommentFn.error}
           />
