@@ -12,5 +12,9 @@ Requirements:
 
 - No databases required, but show the data structure in memory
 
+# Current Styling
 
+<img width="650" alt="image" src="https://user-images.githubusercontent.com/73449259/214394527-7ae6d474-a141-4fef-a05e-89b53935af34.png">
+
+# Initial Image Reference
 ![image001](https://user-images.githubusercontent.com/73449259/214118725-1da3fb19-2514-4b63-8d51-f2094a586f69.png)
