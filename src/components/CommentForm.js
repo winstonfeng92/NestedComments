@@ -15,25 +15,19 @@ export function CommentForm({
   function handleSubmit(e) {
     e.preventDefault()
     //onSubmit(message).then(() => setMessage(""))
-    console.log('comment attempt')
+    //console.log('comment attempt')
     update(index, message, comments, setComments)
     setMessage("")
-    // const commentObject = {
-    //     content: newComment,
-    //     id: Math.random(),
-    //     user: 'Userdefault'
-    //   }
-    //   counterComment+=1;
-    //   setComments(comments.concat(commentObject))
-    //   setNewComment('')
   }
 
   const update = (index, comment, comments, setComments) => {
     console.log('attempting update')
-    console.log(message)
+    //console.log(message)
+    //console.log(comment)
     const copy = [...comments];
     console.log(copy)
     copy[index].content = comment;
+    console.log('copy index content')
     setComments(copy);
 }
 

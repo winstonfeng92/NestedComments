@@ -39,13 +39,29 @@ function updateLocalComment(id, message, setComments) {
     })
 }
 
-
-
 const deleteComment = (index, comment, comments, setComments) => {
     const copy = [...comments];
     console.log('winston')
     copy.splice(index, 1);
     setComments(copy);
+}
+
+const deleteComment2 = (index, comment, comments, setComments) => {
+    const copy = [...comments];
+    const copy2 = removeFromList(copy, comment.id);
+    console.log(copy2)
+    setComments(copy2);
+}
+
+function removeFromList(array, id) {
+    console.log(array);
+    return array
+        .filter(comment => comment.id !== id)
+        .map((comment) => {
+            if (!comment.children || !Array.isArray(comment.children)) return comment;
+            comment.children = removeFromList(comment.children, id);
+            return comment;
+        });
 }
 
 // function handleSubmitComment(comment, comments, setComments) {
@@ -79,8 +95,7 @@ const AllComments = ({ index, comment , comments, setComments}) => {
         <div className = "footer"> 
             <button>Reply</button> 
             <button onClick={() => setIsEditing(prev => !prev)}> Edit </button>
-            <button onClick={() => deleteComment(index, comment, comments, setComments)}> Delete </button>
-            <button onClick={() => myDeleteFunction(comment, comments, setComments)}> Delete2 </button>
+            <button onClick={() => deleteComment2(index, comment, comments, setComments)}> Delete </button>
             </div>
         {isEditing ? 
           <CommentForm
