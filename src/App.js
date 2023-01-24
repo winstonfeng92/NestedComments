@@ -10,9 +10,11 @@ const App = (props) => {
   const addComment = (event) => {
     event.preventDefault()
     const commentObject = {
-      content: newComment,
       id: Math.random(),
-      user: 'Userdefault'
+      content: newComment,
+      user: 'Userdefault',
+      children: [],
+
     }
     setComments(comments.concat(commentObject))
     setNewComment('')
