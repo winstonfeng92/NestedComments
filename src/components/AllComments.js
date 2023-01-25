@@ -6,18 +6,14 @@ import { CommentForm } from "./CommentForm"
 const deleteComment2 = (index, comment, comments, setComments) => {
     const copy = [...comments];
     const copy2 = removeFromList(copy, comment.id);
-    console.log(copy2)
     setComments(copy2);
 }
 
 function removeFromList(array, id) {
-    console.log(array);
     return array
         .filter(comment => comment.id !== id)
         .map((comment) => {
             if (!comment.children || !Array.isArray(comment.children)) return comment;
-            console.log('2nd map')
-            console.log(comment.children)
             comment.children = removeFromList(comment.children, id);
             return comment;
         });
@@ -45,23 +41,25 @@ const AllComments = ({ index, comment , comments, setComments}) => {
         {isReplying ? 
           <CommentForm
             initialValue={comment.content}
-            onClick={() => setIsReplying(prev => !prev)}
+            //onClick={() => setIsReplying(false)}
             comments = {comments}
             index = {index}
             setComments = {setComments}
             id = {comment.id}
             onSubmit = {'handleReply'}
+            setisReplying = {setIsReplying}
           />
         : <div></div>}
         {isEditing ? 
           <CommentForm
             initialValue={comment.content}
-            onClick={() => setIsEditing(prev => !prev)}
+            onClick={() => setIsEditing(false)}
             comments = {comments}
             index = {index}
             setComments = {setComments}
             id = {comment.id}
             onSubmit = {'handleEdit'}
+            setIsEditing = {setIsEditing}
           />
         : <div></div>}
         <div>{comment.children?.map(comment =>

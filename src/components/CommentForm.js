@@ -1,10 +1,7 @@
 import { useState } from "react"
 
 export function CommentForm({
-  loading,
-  error,
   onSubmit,
-  autoFocus = false,
   initialValue = "",
   index,
   comments,
@@ -13,8 +10,8 @@ export function CommentForm({
 }) {
   const [message, setMessage] = useState(initialValue)
 
-  function handleSubmit(e) {
-    e.preventDefault()
+  function handleSubmit(event) {
+    event.preventDefault()
     const copy = [...comments];
     const copy2 = updateList(copy, id, message)
     setComments(copy2);
@@ -22,22 +19,18 @@ export function CommentForm({
   }
 
 
-
 function updateList(array, id, newMessage) {
-    console.log('trying to update this')
-    console.log(array);
     return array
         .map((comment) => {
             if(comment.id == id)
-            {console.log('first map in updateList')
+            {
             comment.content = newMessage
 
             }
             if (!comment.children || !Array.isArray(comment.children)) 
-            {   console.log('first return clause')
+            {   
                 if(comment.id == id) comment.content = newMessage;
                 return comment;}
-            console.log('map2')
             comment.children = updateList(comment.children, id, newMessage);
             return comment;
         });
@@ -51,31 +44,24 @@ const handleAddComment = (event) => {
       user: 'Userdefault',
       children: [],
     }
-    console.log("mssage")
-    console.log(message)
     const copy = [...comments];
     const copy2 = updateComments(copy, id, commentObject)
-    console.log("end of handler")
-    console.log(copy2)
     setComments(copy2);
     setMessage("")
 }
 
 function updateComments(array, id, newReply) {
-    console.log('trying to update this')
-    console.log(array);
+
     return array
         .map((comment) => {
             if(comment.id == id)
-            {console.log('first map in updateList')
+            {
             comment.children.push(newReply)
-
             }
             if (!comment.children || !Array.isArray(comment.children)) 
             {   console.log('first return clause')
                 if(comment.id == id) comment.children.push(newReply);
                 return comment;}
-            console.log('map2')
             comment.children = updateComments(comment.children, id, newReply);
             return comment;
         });
@@ -96,7 +82,6 @@ function updateComments(array, id, newReply) {
           {onSubmit==='handleEdit'?"Edit":"Reply"}
         </button>
       </div>
-      <div className="error-msg">{error}</div>
     </form>
   )
 }
