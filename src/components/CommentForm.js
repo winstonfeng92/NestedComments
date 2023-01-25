@@ -7,6 +7,8 @@ export function CommentForm({
   comments,
   setComments,
   id,
+  getFalseReply,
+  getFalseEdit,
 }) {
   const [message, setMessage] = useState(initialValue)
 
@@ -16,6 +18,7 @@ export function CommentForm({
     const copy2 = updateList(copy, id, message)
     setComments(copy2);
     setMessage("")
+    getFalseEdit(false)
   }
 
 
@@ -47,8 +50,10 @@ const handleAddComment = (event) => {
     const copy = [...comments];
     const copy2 = updateComments(copy, id, commentObject)
     setComments(copy2);
-    setMessage("")
+    setMessage("");
+    getFalseReply(false);
 }
+
 
 function updateComments(array, id, newReply) {
 

@@ -25,7 +25,13 @@ const AllComments = ({ index, comment , comments, setComments}) => {
     const [isEditing, setIsEditing] = useState(false)
     const [isReplying, setIsReplying] = useState(false)
 
+    const getFalseReply = (boolFalse) => {
+    setIsReplying(boolFalse);
+    }
 
+    const getFalseEdit = (boolFalse) => {
+        setIsEditing(boolFalse);
+        }
 
     return(
         <div className="comment">
@@ -48,6 +54,7 @@ const AllComments = ({ index, comment , comments, setComments}) => {
             id = {comment.id}
             onSubmit = {'handleReply'}
             setisReplying = {setIsReplying}
+            getFalseReply = {getFalseReply}
           />
         : <div></div>}
         {isEditing ? 
@@ -60,6 +67,7 @@ const AllComments = ({ index, comment , comments, setComments}) => {
             id = {comment.id}
             onSubmit = {'handleEdit'}
             setIsEditing = {setIsEditing}
+            getFalseEdit = {getFalseEdit}
           />
         : <div></div>}
         <div>{comment.children?.map(comment =>
